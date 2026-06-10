@@ -1,0 +1,68 @@
+# 心脏病分类预测项目配置文件
+
+# 数据配置
+data:
+  raw_path: 'data/raw/heart.csv'
+  processed_path: 'data/processed/'
+  test_size: 0.2
+  random_state: 42
+  download_url: 'https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data'
+
+# 预处理配置
+preprocessing:
+  normalize: true
+  handle_missing: true
+  outlier_detection: true
+  z_score_threshold: 3
+
+# 特征工程配置
+feature_engineering:
+  scaling_method: 'standard'  # 'standard', 'minmax', 'robust'
+  feature_selection: true
+  n_features: 10
+
+# 模型配置
+models:
+  logistic_regression:
+    enabled: true
+    hyperparameters:
+      C: 1.0
+      max_iter: 1000
+      solver: 'lbfgs'
+  
+  random_forest:
+    enabled: true
+    hyperparameters:
+      n_estimators: 100
+      max_depth: 10
+      min_samples_split: 5
+      random_state: 42
+  
+  svm:
+    enabled: true
+    hyperparameters:
+      kernel: 'rbf'
+      C: 1.0
+      gamma: 'scale'
+  
+  xgboost:
+    enabled: true
+    hyperparameters:
+      n_estimators: 100
+      max_depth: 5
+      learning_rate: 0.1
+      random_state: 42
+
+# 交叉验证配置
+cross_validation:
+  enabled: true
+  n_splits: 5
+  shuffle: true
+
+# 输出配置
+output:
+  model_path: 'models/'
+  plot_path: 'plots/'
+  report_path: 'reports/'
+  save_models: true
+  save_plots: true
